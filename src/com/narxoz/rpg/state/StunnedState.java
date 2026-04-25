@@ -32,6 +32,7 @@ public class StunnedState implements HeroState {
         }
     }
 
+
     @Override
     public void onTurnEnd(Hero hero) {
     }

@@ -25,6 +25,7 @@ public class PoisonedState implements HeroState {
         hero.takeDamage(5);
     }
 
+
     @Override
     public void onTurnEnd(Hero hero) {
         turnsRemaining--;
