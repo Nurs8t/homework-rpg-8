@@ -29,7 +29,6 @@ public class StunnedState implements HeroState {
         System.out.println(hero.getName() + " is stunned and cannot act.");
         turnsRemaining--;
         if (turnsRemaining <= 0 && hero.isAlive()) {
-            hero.changeState(new NormalState());
         }
     }
 
