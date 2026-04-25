@@ -1,17 +1,47 @@
 package com.narxoz.rpg;
 
-/**
- * Entry point for Homework 8 — The Haunted Tower: Ascending the Floors.
- *
- * Build your heroes, floors, tower runner, and execute the climb here.
- */
+import com.narxoz.rpg.combatant.Hero;
+import com.narxoz.rpg.combatant.Monster;
+import com.narxoz.rpg.floor.BossFloor;
+import com.narxoz.rpg.floor.CombatFloor;
+import com.narxoz.rpg.floor.TowerFloor;
+import com.narxoz.rpg.floor.TrapFloor;
+import com.narxoz.rpg.state.PoisonedState;
+import com.narxoz.rpg.tower.TowerRunResult;
+import com.narxoz.rpg.tower.TowerRunner;
+
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
-        // TODO (student): Create at least 2 heroes with different starting states
-        // TODO (student): Create a sequence of ≥ 4 floors using ≥ 3 distinct floor subclasses
-        // TODO (student): Instantiate a tower runner and execute the tower climb
-        // TODO (student): Track and print results (floors cleared, heroes surviving, tower status)
-        // TODO (student): Demonstrate visible state transitions in the output
+        Hero warrior = new Hero("Warrior", 100, 20, 8);
+        Hero mage = new Hero("Mage", 70, 30, 3);
+
+        mage.setState(new PoisonedState(2));
+
+        List<Hero> party = List.of(warrior, mage);
+
+        List<TowerFloor> floors = List.of(
+                new CombatFloor(new Monster("Skeleton", 40, 12)),
+                new TrapFloor(),
+                new CombatFloor(new Monster("Stone Golem", 70, 18)),
+                new BossFloor(new Monster("Shadow Dragon", 120, 25))
+        );
+
+        System.out.println("=== THE HAUNTED TOWER ===");
+        System.out.println("Party:");
+        System.out.println("- " + warrior.getName() + " HP: " + warrior.getMaxHp()
+                + " State: " + warrior.getState().getName());
+        System.out.println("- " + mage.getName() + " HP: " + mage.getMaxHp()
+                + " State: " + mage.getState().getName());
+
+        TowerRunner runner = new TowerRunner(party, floors);
+        TowerRunResult result = runner.run();
+
+        System.out.println("\n=== TOWER RUN COMPLETE ===");
+        System.out.println("Floors cleared  : " + result.getFloorsCleared());
+        System.out.println("Heroes surviving: " + result.getHeroesSurviving());
+        System.out.println("Tower conquered : " + result.isReachedTop());
     }
 }
