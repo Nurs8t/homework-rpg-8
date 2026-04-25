@@ -1,5 +1,8 @@
 package com.narxoz.rpg.combatant;
 
+import com.narxoz.rpg.state.NormalState;
+import com.narxoz.rpg.state.PoisonedState;
+
 /**
  * Represents a player-controlled hero participating in the tower climb.
  *
@@ -45,5 +48,13 @@ public class Hero {
      */
     public void heal(int amount) {
         hp = Math.min(maxHp, hp + amount);
+    }
+
+    public PoisonedState getState() {
+        return state;
+    }
+
+    public void setState(NormalState state) {
+        this.state = state;
     }
 }
