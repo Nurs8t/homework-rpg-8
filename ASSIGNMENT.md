@@ -38,7 +38,7 @@ You are building **The Haunted Tower: Ascending the Floors** — a sequence of i
 ### The Interface
 
 `HeroState` defines how a hero behaves while in a particular state:
-
+r
 ```java
 String getName();
 int modifyOutgoingDamage(int basePower);      // scale the hero's attack
